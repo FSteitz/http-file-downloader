@@ -29,5 +29,7 @@ fun main(args: Array<String>) {
     exitProcess(-1)
   }
 
-  HttpFileDownloader(args[0]).importEndpointConfigs()
+  HttpFileDownloader(args[0])
+      .importEndpointConfigs()
+      .startDownloads()
 }

@@ -29,7 +29,7 @@ class HttpFileDownloader(private val endpointConfigDir: String) {
   private val endpointConfigFiles = mutableListOf<File>()
   private val endpointConfigs = mutableListOf<EndpointConfig>()
 
-  fun importEndpointConfigs() {
+  fun importEndpointConfigs(): HttpFileDownloader {
     val configDir = File(endpointConfigDir)
 
     if (!configDir.isDirectory) {
@@ -38,10 +38,21 @@ class HttpFileDownloader(private val endpointConfigDir: String) {
     }
 
     configDir.listFiles()?.forEach {
-      println("Found file '${it.absolutePath}' - importing it")
+      println("Found config file '${it.absolutePath}' - importing it...")
 
       endpointConfigFiles.add(it)
       endpointConfigs.add(Json.decodeFromString(it.bufferedReader().readText()))
     }
+
+    return this
+  }
+
+  fun startDownloads() {
+    if (endpointConfigs.isEmpty()) {
+      System.err.println("ERROR: 'Config files must be imported before downloads can be started")
+      exitProcess(-1)
+    }
+
+    endpointConfigs.forEach { HttpEndpointFileDownloader(it).downloadAllFiles() }
   }
 }
