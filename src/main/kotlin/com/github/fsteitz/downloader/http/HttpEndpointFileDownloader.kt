@@ -18,15 +18,17 @@ package com.github.fsteitz.downloader.http
 import com.github.fsteitz.downloader.http.model.Endpoint
 import com.github.fsteitz.downloader.http.model.EndpointConfig
 import com.github.fsteitz.downloader.http.model.HttpMethod
+import java.io.File
 import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
 import java.net.http.HttpResponse
+import kotlin.system.exitProcess
 
 /**
  * @author Florian Steitz (florian@fsteitz.com)
  */
-class HttpEndpointFileDownloader(private val endpointConfig: EndpointConfig) {
+class HttpEndpointFileDownloader(private val endpointConfig: EndpointConfig, private val targetDir: String) {
 
   private val httpClient: HttpClient by lazy { HttpClient.newBuilder().build() }
 
@@ -37,7 +39,7 @@ class HttpEndpointFileDownloader(private val endpointConfig: EndpointConfig) {
 
   private fun downloadFile(endpointIndex: Int, endpoint: Endpoint, totalEndpoints: Int) {
     println("Downloading file ${endpointIndex + 1}/$totalEndpoints: '${endpoint.description}'")
-    println(sendHttpRequest(endpoint.httpUrl, endpoint.httpMethod))
+    writeToDisk(sendHttpRequest(endpoint.httpUrl, endpoint.httpMethod), endpoint)
   }
 
   private fun sendHttpRequest(httpUrl: String, httpMethod: HttpMethod): String? {
@@ -46,5 +48,34 @@ class HttpEndpointFileDownloader(private val endpointConfig: EndpointConfig) {
         .build();
 
     return httpClient.send(request, HttpResponse.BodyHandlers.ofString()).body()
+  }
+
+  private fun writeToDisk(fileContent: String?, endpoint: Endpoint) {
+    if (fileContent == null) {
+      System.err.println("ERROR: File for endpoint '${endpoint.description} (${endpoint.httpUrl})' could not be downloaded")
+      exitProcess(-1)
+    }
+
+    writeToDisk(fileContent, buildTargetFile(endpoint))
+  }
+
+  private fun writeToDisk(fileContent: String, targetFile: File) {
+    if (!targetFile.exists()) {
+      targetFile.createNewFile()
+    }
+
+    targetFile.writeText(fileContent)
+  }
+
+  private fun buildTargetFile(endpoint: Endpoint): File {
+    val targetFileDirPath = targetDir + File.separator + endpointConfig.targetSubDir;
+    val targetFileDir = File(targetFileDirPath)
+
+    if (!targetFileDir.isDirectory) {
+      System.err.println("ERROR: '$targetFileDirPath' is not a directory")
+      exitProcess(-1)
+    }
+
+    return File(targetFileDirPath + File.separator + endpoint.fileName)
   }
 }

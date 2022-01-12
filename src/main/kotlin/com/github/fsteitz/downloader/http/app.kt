@@ -24,12 +24,12 @@ fun main(args: Array<String>) {
   if (args.isEmpty()) {
     System.err.println("ERROR: No program arguments were provided")
     exitProcess(-1)
-  } else if (args.size != 1) {
+  } else if (args.size != 2) {
     System.err.println("ERROR: Invalid number of arguments were provided")
     exitProcess(-1)
   }
 
-  HttpFileDownloader(args[0])
+  HttpFileDownloader(args[0], args[1])
       .importEndpointConfigs()
       .startDownloads()
 }

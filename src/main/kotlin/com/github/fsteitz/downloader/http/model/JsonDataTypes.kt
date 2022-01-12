@@ -23,6 +23,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class EndpointConfig(
     val description: String,
+    val targetSubDir: String,
     val endpoints: List<Endpoint>
 )
 

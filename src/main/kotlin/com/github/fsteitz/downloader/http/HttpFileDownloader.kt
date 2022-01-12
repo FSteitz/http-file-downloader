@@ -24,7 +24,7 @@ import kotlin.system.exitProcess
 /**
  * @author Florian Steitz (florian@fsteitz.com)
  */
-class HttpFileDownloader(private val endpointConfigDir: String) {
+class HttpFileDownloader(private val endpointConfigDir: String, private val targetDir: String) {
 
   private val endpointConfigFiles = mutableListOf<File>()
   private val endpointConfigs = mutableListOf<EndpointConfig>()
@@ -53,6 +53,6 @@ class HttpFileDownloader(private val endpointConfigDir: String) {
       exitProcess(-1)
     }
 
-    endpointConfigs.forEach { HttpEndpointFileDownloader(it).downloadAllFiles() }
+    endpointConfigs.forEach { HttpEndpointFileDownloader(it, targetDir).downloadAllFiles() }
   }
 }
