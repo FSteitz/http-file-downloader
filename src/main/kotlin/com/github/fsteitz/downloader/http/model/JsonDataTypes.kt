@@ -13,21 +13,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.fsteitz.downloader.http
+package com.github.fsteitz.downloader.http.model
 
-import kotlin.system.exitProcess
+import kotlinx.serialization.Serializable
 
 /**
  * @author Florian Steitz (florian@fsteitz.com)
  */
-fun main(args: Array<String>) {
-  if (args.isEmpty()) {
-    System.err.println("ERROR: No program arguments were provided")
-    exitProcess(-1)
-  } else if (args.size != 1) {
-    System.err.println("ERROR: Invalid number of arguments were provided")
-    exitProcess(-1)
-  }
+@Serializable
+data class EndpointConfig(
+    val description: String,
+    val endpoints: List<Endpoint>
+)
 
-  HttpFileDownloader(args[0]).importEndpointConfigs()
+/**
+ * @author Florian Steitz (florian@fsteitz.com)
+ */
+@Serializable
+data class Endpoint(
+    val httpUrl: String,
+    val httpMethod: HttpMethod,
+    val fileName: String,
+    val description: String
+)
+
+/**
+ * @author Florian Steitz (florian@fsteitz.com)
+ */
+@Serializable
+enum class HttpMethod {
+  GET,
+  POST
 }
