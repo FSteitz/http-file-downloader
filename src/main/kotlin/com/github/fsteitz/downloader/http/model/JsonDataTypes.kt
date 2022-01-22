@@ -15,6 +15,7 @@
  */
 package com.github.fsteitz.downloader.http.model
 
+import com.github.fsteitz.downloader.http.url.processor.UrlProcessorType
 import kotlinx.serialization.Serializable
 
 /**
@@ -24,6 +25,7 @@ import kotlinx.serialization.Serializable
 data class EndpointConfig(
     val description: String,
     val targetSubDir: String,
+    val urlProcessors: List<ConfiguredUrlProcessor>,
     val endpoints: List<Endpoint>
 )
 
@@ -45,4 +47,15 @@ data class Endpoint(
 enum class HttpMethod {
   GET,
   POST
+}
+
+/**
+ * @author Florian Steitz (florian@fsteitz.com)
+ */
+@Serializable
+data class ConfiguredUrlProcessor(val type: UrlProcessorType, val variables: Map<String, String>) {
+
+  fun process(url: String): String {
+    return type.toUrlProcessor().process(url, variables)
+  }
 }

@@ -15,6 +15,7 @@
  */
 package com.github.fsteitz.downloader.http
 
+import com.github.fsteitz.downloader.http.model.ConfiguredUrlProcessor
 import com.github.fsteitz.downloader.http.model.Endpoint
 import com.github.fsteitz.downloader.http.model.EndpointConfig
 import com.github.fsteitz.downloader.http.model.HttpMethod
@@ -33,21 +34,36 @@ class HttpEndpointFileDownloader(private val endpointConfig: EndpointConfig, pri
   private val httpClient: HttpClient by lazy { HttpClient.newBuilder().build() }
 
   fun downloadAllFiles() {
-    println("Downloading files of endpoint config '${endpointConfig.description}'...")
+    println("Downloading files of endpoint config '${endpointConfig.description}'")
     endpointConfig.endpoints.forEachIndexed { index, endpoint -> downloadFile(index, endpoint, endpointConfig.endpoints.size) }
   }
 
   private fun downloadFile(endpointIndex: Int, endpoint: Endpoint, totalEndpoints: Int) {
-    println("Downloading file ${endpointIndex + 1}/$totalEndpoints: '${endpoint.description}'")
+    println("--------------------------------------------------")
+    println("Preparing download of file ${endpointIndex + 1}/$totalEndpoints: '${endpoint.description}'")
     writeToDisk(sendHttpRequest(endpoint.httpUrl, endpoint.httpMethod), endpoint)
   }
 
   private fun sendHttpRequest(httpUrl: String, httpMethod: HttpMethod): String? {
+    val processedUrl = processUrl(httpUrl, endpointConfig.urlProcessors.listIterator())
     val request = HttpRequest.newBuilder()
-        .uri(URI.create(httpUrl))
+        .uri(URI.create(processedUrl))
         .build();
 
     return httpClient.send(request, HttpResponse.BodyHandlers.ofString()).body()
+  }
+
+  private fun processUrl(httpUrl: String, iterator: ListIterator<ConfiguredUrlProcessor>): String {
+    if (iterator.hasNext()) {
+      val nextIndex = iterator.nextIndex()
+      val nextUrlProcessor = iterator.next()
+
+      println("Processing step $nextIndex: '${nextUrlProcessor::class.simpleName}' processing URL '$httpUrl'")
+      return processUrl(nextUrlProcessor.process(httpUrl), iterator)
+    }
+
+    println("Downloading from URL '$httpUrl'")
+    return httpUrl
   }
 
   private fun writeToDisk(fileContent: String?, endpoint: Endpoint) {
