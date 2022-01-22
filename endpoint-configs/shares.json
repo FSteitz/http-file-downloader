@@ -1,0 +1,135 @@
+{
+  "description": "Share Endpoints",
+  "targetSubDir": "shares",
+  "urlProcessors": [
+    {
+      "type": "SUBSTITUTOR",
+      "variables": {
+        "minTime": "6.1.2022",
+        "maxTime": "22.1.2022"
+      }
+    }
+  ],
+  "endpoints": [
+    {
+      "httpUrl": "https://www.ariva.de/quote/historic/historic.csv?secu=467&boerse_id=131&clean_split=1&clean_payout=&clean_bezug=1&min_time=${minTime}&max_time=${maxTime}&trenner=%3B&go=Download",
+      "httpMethod": "GET",
+      "fileName": "stock_rate_adobe.csv",
+      "description": "Adobe Inc Share"
+    },
+    {
+      "httpUrl": "https://www.ariva.de/quote/historic/historic.csv?secu=1068&boerse_id=131&clean_split=1&clean_payout=&clean_bezug=1&min_time=${minTime}&max_time=${maxTime}&trenner=%3B&go=Download",
+      "httpMethod": "GET",
+      "fileName": "stock_rate_amd.csv",
+      "description": "Advanced Micro Devices Inc."
+    },
+    {
+      "httpUrl": "https://www.ariva.de/quote/historic/historic.csv?secu=155061022&boerse_id=40&clean_split=1&clean_payout=0&clean_bezug=1&min_time=${minTime}&max_time=${maxTime}&trenner=%3B&go=Download",
+      "httpMethod": "GET",
+      "fileName": "stock_rate_astra-space.csv",
+      "description": "Astra Space Inc."
+    },
+    {
+      "httpUrl": "https://www.ariva.de/quote/historic/historic.csv?secu=156114115&boerse_id=21&clean_split=1&clean_payout=0&clean_bezug=1&min_time=${minTime}&max_time=${maxTime}&trenner=%3B&go=Download",
+      "httpMethod": "GET",
+      "fileName": "stock_rate_blacksky.csv",
+      "description": "BlackSky Technology Inc."
+    },
+    {
+      "httpUrl": "https://www.ariva.de/quote/historic/historic.csv?secu=153518694&boerse_id=131&clean_split=1&clean_payout=&clean_bezug=1&min_time=${minTime}&max_time=${maxTime}&trenner=%3B&go=Download",
+      "httpMethod": "GET",
+      "fileName": "stock_rate_digitalocean.csv",
+      "description": "DigitalOcean Holdings Inc."
+    },
+    {
+      "httpUrl": "https://www.ariva.de/quote/historic/historic.csv?secu=442&boerse_id=131&clean_split=1&clean_payout=0&clean_bezug=1&min_time=${minTime}&max_time=${maxTime}&trenner=%3B&go=Download",
+      "httpMethod": "GET",
+      "fileName": "stock_rate_ing.csv",
+      "description": "ING Groep"
+    },
+    {
+      "httpUrl": "https://www.ariva.de/quote/historic/historic.csv?secu=415&boerse_id=131&clean_split=1&clean_payout=&clean_bezug=1&min_time=${minTime}&max_time=${maxTime}&trenner=%3B&go=Download",
+      "httpMethod": "GET",
+      "fileName": "stock_rate_microsoft.csv",
+      "description": "Microsoft Corp."
+    },
+    {
+      "httpUrl": "https://www.ariva.de/quote/historic/historic.csv?secu=155710189&boerse_id=40&clean_split=1&clean_payout=0&clean_bezug=1&min_time=${minTime}&max_time=${maxTime}&trenner=%3B&go=Download",
+      "httpMethod": "GET",
+      "fileName": "stock_rate_momentus.csv",
+      "description": "Momentus Inc."
+    },
+    {
+      "httpUrl": "https://www.ariva.de/quote/historic/historic.csv?secu=132121729&boerse_id=131&clean_split=1&clean_payout=&clean_bezug=1&min_time=${minTime}&max_time=${maxTime}&trenner=%3B&go=Download",
+      "httpMethod": "GET",
+      "fileName": "stock_rate_mynaric.csv",
+      "description": "Mynaric AG"
+    },
+    {
+      "httpUrl": "https://www.ariva.de/quote/historic/historic.csv?secu=37808&boerse_id=131&clean_split=1&clean_payout=&clean_bezug=1&min_time=${minTime}&max_time=${maxTime}&trenner=%3B&go=Download",
+      "httpMethod": "GET",
+      "fileName": "stock_rate_netflix.csv",
+      "description": "Netflix Inc."
+    },
+    {
+      "httpUrl": "https://www.ariva.de/quote/historic/historic.csv?secu=1079&boerse_id=131&clean_split=1&clean_payout=&clean_bezug=1&min_time=${minTime}&max_time=${maxTime}&trenner=%3B&go=Download",
+      "httpMethod": "GET",
+      "fileName": "stock_rate_nvidia.csv",
+      "description": "NVIDIA Corp."
+    },
+    {
+      "httpUrl": "https://www.ariva.de/quote/historic/historic.csv?secu=121455745&boerse_id=131&clean_split=1&clean_payout=&clean_bezug=1&min_time=${minTime}&max_time=${maxTime}&trenner=%3B&go=Download",
+      "httpMethod": "GET",
+      "fileName": "stock_rate_paypal.csv",
+      "description": "PayPal Holdings Inc."
+    },
+    {
+      "httpUrl": "https://www.ariva.de/quote/historic/historic.csv?secu=158495023&boerse_id=40&clean_split=1&clean_payout=0&clean_bezug=1&min_time=${minTime}&max_time=${maxTime}&trenner=%3B&go=Download",
+      "httpMethod": "GET",
+      "fileName": "stock_rate_planet-labs.csv",
+      "description": "Planet Labs PBC"
+    },
+    {
+      "httpUrl": "https://www.ariva.de/quote/historic/historic.csv?secu=156001377&boerse_id=21&clean_split=1&clean_payout=0&clean_bezug=1&min_time=${minTime}&max_time=${maxTime}&trenner=%3B&go=Download",
+      "httpMethod": "GET",
+      "fileName": "stock_rate_redwire.csv",
+      "description": "Redwire Corp."
+    },
+    {
+      "httpUrl": "https://www.ariva.de/quote/historic/historic.csv?secu=155886782&boerse_id=40&clean_split=1&clean_payout=0&clean_bezug=1&min_time=${minTime}&max_time=${maxTime}&trenner=%3B&go=Download",
+      "httpMethod": "GET",
+      "fileName": "stock_rate_rocket-lab.csv",
+      "description": "Rocket Lab USA Inc."
+    },
+    {
+      "httpUrl": "https://www.ariva.de/quote/historic/historic.csv?secu=257886&boerse_id=131&clean_split=1&clean_payout=&clean_bezug=1&min_time=${minTime}&max_time=${maxTime}&trenner=%3B&go=Download",
+      "httpMethod": "GET",
+      "fileName": "stock_rate_salesforce.csv",
+      "description": "salesforce.com Inc."
+    },
+    {
+      "httpUrl": "https://www.ariva.de/quote/historic/historic.csv?secu=134595507&boerse_id=131&clean_split=1&clean_payout=&clean_bezug=1&min_time=${minTime}&max_time=${maxTime}&trenner=%3B&go=Download",
+      "httpMethod": "GET",
+      "fileName": "stock_rate_spotify.csv",
+      "description": "SPOTIFY TECHNOLOGY S.A."
+    },
+    {
+      "httpUrl": "https://www.ariva.de/quote/historic/historic.csv?secu=103220186&boerse_id=131&clean_split=1&clean_payout=&clean_bezug=1&min_time=${minTime}&max_time=${maxTime}&trenner=%3B&go=Download",
+      "httpMethod": "GET",
+      "fileName": "stock_rate_tesla.csv",
+      "description": "Tesla Inc."
+    },
+    {
+      "httpUrl": "https://www.ariva.de/quote/historic/historic.csv?secu=150388935&boerse_id=131&clean_split=1&clean_payout=&clean_bezug=1&min_time=${minTime}&max_time=${maxTime}&trenner=%3B&go=Download",
+      "httpMethod": "GET",
+      "fileName": "stock_rate_unity-software.csv",
+      "description": "Unity Software Inc."
+    },
+    {
+      "httpUrl": "https://www.ariva.de/quote/historic/historic.csv?secu=134989025&boerse_id=131&clean_split=1&clean_payout=1&clean_bezug=1&min_time=${minTime}&max_time=${maxTime}&trenner=%3B&go=Download",
+      "httpMethod": "GET",
+      "fileName": "stock_rate_xtr-msci-world.csv",
+      "description": "Xtr. MSCI World ESG 1C o.N."
+    }
+  ]
+}
