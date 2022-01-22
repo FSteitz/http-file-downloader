@@ -80,6 +80,7 @@ class HttpEndpointFileDownloader(private val endpointConfig: EndpointConfig, pri
       targetFile.createNewFile()
     }
 
+    println("Writing downloaded file to '${targetFile.absolutePath}'")
     targetFile.writeText(fileContent)
   }
 
